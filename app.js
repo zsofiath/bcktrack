@@ -63,7 +63,22 @@ console.log(soli);
 
 
 
-// var sackSize = 20;
+var sackSize = 20;
+var knapsack = $BT();
+var result = knapsack.setTasks([
+    {w: 5},
+    {w: 7},
+    {w: 5},
+    {w: 5},
+    {w: 1},
+    {w: 3},
+    {w: 2}
+]).
+setPossibilities([true,false])
+acceplabilityWidthHistory(function(solution, task){
+    
+})
+
 // var knapsack = $BT(
 //     [//objevts
 //         {w:10, v:10, possibilities: [true, false]},
