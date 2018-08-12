@@ -5,13 +5,33 @@
 
     Bcktrack.prototype = {
         setTasks: function(arr){
-            this.arrayValidation(arr);
+            this.arrayValidation("setTasks(arr):",arr);
             this.tasks = arr;
         },
-        arrayValidation: function(param){
+        setTasksWidthSoutions: function(arr){
+            this.arrayValidation("setTasksWidthSoutions(arr):",arr);
+            this.solutionArrayValidation("setTasksWidthSoutions(arr): ",arr);
+            this.tasks = arr;
+            this.isTaskSolutionsSet = true;
+        },
+        arrayValidation: function(funct,param){
             if(!(param instanceof Array )) {
-                throw "Array expected, "+typeof param+ " is given.";
+                throw funct+" Array expected, "+typeof param+ " is given.";
             }
+        },
+        solutionArrayValidation(funct,param){
+            var errorStr = "";
+            param.forEach(function(elemet){
+                if(!elemet.solutions){
+                    errorStr += "\n\t"+JSON.stringify(elemet)+" solutions are not set.";
+                }else if(!(elemet.solutions instanceof Array )) {
+                    errorStr += "\n\t"+JSON.stringify(elemet)+" solutions is expected to be an array.";
+                }
+                
+            });
+            
+            throw funct+errorStr;
+            
         }
 
     }
