@@ -8,6 +8,10 @@
             this.arrayValidation("setTasks(arr):",arr);
             this.tasks = arr;
         },
+        setSolutions: function(arr){
+            this.arrayValidation("setSolutions(arr):",arr);
+            this.solutions = arr;
+        },
         setTasksWidthSoutions: function(arr){
             this.arrayValidation("setTasksWidthSoutions(arr):",arr);
             this.solutionArrayValidation("setTasksWidthSoutions(arr): ",arr);
@@ -30,7 +34,9 @@
                 
             });
             
-            throw funct+errorStr;
+            if(errorStr){
+                throw funct+errorStr;
+            }
             
         }
 
@@ -40,6 +46,7 @@
         var self = this;
 
         self.tasks = [];
+        self.solutions = [];
         return this;
     }
 
