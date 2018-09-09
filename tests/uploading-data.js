@@ -49,11 +49,11 @@ describe('Bcktrack', function() {
                 expect(function(){bt.setTasksWidthSoutions([
                     {test:1, solutions: ["nulla","egy"]},
                     {test:2}
-                ]);}).toThrow('setTasksWidthSoutions(arr): \n\t{"test":2} solutions are not set.');
+                ]);}).toThrow('setTasksWidthSoutions(arr):\n\t{"test":2} solutions are not set.');
                 expect(function(){bt.setTasksWidthSoutions([
                     {test:1, solutions: ["nulla","egy"]},
                     {test:2, solutions: 3}
-                ]);}).toThrow('setTasksWidthSoutions(arr): \n\t{"test":2,"solutions":3} solutions is expected to be an array.');
+                ]);}).toThrow('setTasksWidthSoutions(arr):\n\t{"test":2,"solutions":3} solutions are expected to be an array.');
 
             });
         });
@@ -80,21 +80,23 @@ describe('Bcktrack', function() {
                     {test:"joy", criteria:{canBe:[1], cantBe: [2]}},
                     {test:"fun", criteria:{canBe:[1], cantBe: [2]}}
                 ];
-                bt.setSolutions(solutions);
+                bt.setSolutionsWidthCriteria(solutions);
                 expect(bt.solutions).toBe(solutions);
+                expect(bt.isCriteriasSet).toBe(true);
             });
             describe("validations", function(){
-                //not every criteria is set
-                var solutions1 = [
-                    {test:"joy", criteria:{canBe:[1], cantBe: [2]}},
-                    {test:"fun"}
-                ];
-                //criteria is not properly formatted
-                var solutions2 = [
+                it("should trow error if criterias are not set properly", function(){
+                var solutions = [
+                    {test: "bla"},
                     {test:"joy", criteria:[1, 2]},
                     {test:"fun", criteria:{canBe:1, cantBe: 2}},
-                    {test:"fun", criteria:{canBee:1, cantBe: 2}}
+                    {test:"fun2", criteria:{canBee:1, cantBe: 2}}
                 ];
+                expect(function(){bt.setSolutionsWidthCriteria(solutions);}).toThrow('setSolutionsWidthCriteria(arr): Criteria is not properly set:'+
+ '\n\t{"test":"joy","criteria":[1,2]} criteria must be an object width property canBe or cantBe.'+
+ '\n\t{"test":"fun2","criteria":{"canBee":1,"cantBe":2}} criteria must be an object width property canBe or cantBe.');
+
+                });
             });
         });
     })
