@@ -16,8 +16,9 @@ describe('Bcktrack', function() {
                 var testarray = [
                     {test:1},{test:2}
                 ];
-                bt.setTasks(testarray);
+                var btObj = bt.setTasks(testarray);
                 expect(bt.tasks).toBe(testarray);
+                expect(btObj).toBe(bt);
             });
             it("Should die if the given parameter is not an array", function(){
                 var bt = $BT();
@@ -64,8 +65,9 @@ describe('Bcktrack', function() {
                     true,
                     false
                 ];
-                bt.setSolutions(solutions);
+                var btObj = bt.setSolutions(solutions);
                 expect(bt.solutions).toBe(solutions);
+                expect(btObj).toBe(bt);
             });
             it("should throw error if not array given as the parameter", function(){
                 var bt = $BT();
